@@ -49,3 +49,22 @@ Para correr este proyecto localmente, asegúrate de tener instalado [Node.js](ht
 1. **Clonar el repositorio:**
    ```bash
    git clone [https://github.com/tu-usuario/tu-repo.git](https://github.com/tu-usuario/tu-repo.git)
+
+   ```
+2. **Instalar dependencias:**
+   ```bash
+   npm install
+
+   ```
+3. **Iniciar el servidor de desarrollo:**
+   ```bash
+   npm run dev
+
+   ```
+
+### Contacto
+- LinkedIn: www.linkedin.com/in/cristopher-carlos-muñoz-aviles-420210220
+- Email: carloscristopherma@gmail.com
+
+
+<p align="center">Construido con ❤️ por Cristopher Muñoz</p>
