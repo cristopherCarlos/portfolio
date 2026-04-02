@@ -1,34 +1,104 @@
-import { motion } from 'framer-motion';
-import { Terminal, User, Code, Mail } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, Briefcase, Folder, Wrench, Mail } from 'lucide-react';
+import { useMemo, useState } from 'react';
 
-const Navbar = () => {
-  const navItems = [
-    { name: 'Inicio', icon: <Terminal size={20} />, href: '#' },
-    { name: 'Proyectos', icon: <Code size={20} />, href: '#proyectos' },
-    { name: 'Sobre mí', icon: <User size={20} />, href: '#sobre-mi' },
-    { name: 'Contacto', icon: <Mail size={20} />, href: '#contacto' },
-  ];
+// Constants
+const ICON_SIZE = 20;
+const ANIM_DURATION = 0.3;
+const LABEL_RADIUS = '10.5306% / 40%';
+const ACCENT_COLOR = '#38bdf8';
+const SLATE_COLOR = '#94a3b8';
+
+// Animation Variants
+const navbarVariants = {
+  hidden: { y: -20, opacity: 0, x: "-50%" },
+  visible: {
+    y: 0,
+    opacity: 1,
+    x: "-50%",
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+const NavItem = ({ item }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.nav 
-      initial={{ y: -100, x: "-50%" }}
-      animate={{ y: 0, x: "-50%" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-4xl"
+    <motion.li
+      className="relative flex flex-col items-center justify-center  list-none cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-3 flex justify-between items-center shadow-2xl ring-1 ring-white/20 shadow-[0_0_15px_rgba(0,0,0,0.2)]">
-        <div className="text-accent font-bold text-xl tracking-tighter">
-          CRISTOPHER<span className="text-white">.DEV</span>
-        </div>
-        
-        <ul className="hidden md:flex space-x-8">
+      {/* Label - Tooltip arriba del icono */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10, scale: 0.8 }}
+            animate={{ opacity: 1, y: 44, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.8 }}
+            transition={{ duration: ANIM_DURATION, ease: "easeOut" }}
+            className="absolute bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-medium text-white whitespace-nowrap pointer-events-none border border-white/20"
+            style={{ borderRadius: LABEL_RADIUS }}
+          >
+            {item.name}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Icon Button */}
+      <motion.a
+        href={item.href}
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.9 }}
+        className="flex items-center justify-center w-12 h-12"
+        aria-label={item.name}
+      >
+        <motion.div
+          animate={{ color: isHovered ? ACCENT_COLOR : SLATE_COLOR }}
+          transition={{ duration: 0.2 }}
+        >
+          {item.icon}
+        </motion.div>
+      </motion.a>
+
+      {/* Indicador de punto inferior */}
+      {/* <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            layoutId={`dot-${item.name}`}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            className="absolute -bottom-1 w-1 h-1 bg-sky-400 rounded-full"
+          />
+        )}
+      </AnimatePresence> */}
+    </motion.li>
+  );
+};
+
+const Navbar = () => {
+  const navItems = useMemo(() => [
+    { name: 'Inicio', icon: <Home size={ICON_SIZE} />, href: '#' },
+    { name: 'Proyectos', icon: <Folder size={ICON_SIZE} />, href: '#proyectos' },
+    { name: 'experiencia', icon: <Briefcase size={ICON_SIZE} />, href: '#sobre-mi' },
+    { name: 'herramientas', icon: <Wrench size={ICON_SIZE} />, href: '#herramientas' },
+    { name: 'Contacto', icon: <Mail size={ICON_SIZE} />, href: '#contacto' },
+  ], []);
+
+  return (
+    <motion.nav
+      variants={navbarVariants}
+      initial="hidden"
+      animate="visible"
+      className="fixed top-2 left-1/2 z-50"
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <div className="bg-white/5 backdrop-blur-sm rounded-2xl  shadow-lg border border-white/10">
+        <ul className="flex items-center justify-center">
           {navItems.map((item) => (
-            <motion.li key={item.name} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-              <a href={item.href} className="flex items-center gap-2 text-sm font-medium hover:text-accent transition-colors">
-                {item.icon}
-                {item.name}
-              </a>
-            </motion.li>
+            <NavItem key={item.name} item={item} />
           ))}
         </ul>
       </div>
