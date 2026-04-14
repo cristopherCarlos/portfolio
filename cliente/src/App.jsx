@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 
 function App() {
   return (
-    <Router basename="/portfolio">
+    <Router>
       <div className="relative overflow-hidden">
         <Navbar />
 
