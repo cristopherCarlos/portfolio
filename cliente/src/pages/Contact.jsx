@@ -6,19 +6,19 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "tu.email@ejemplo.com",
-      href: "mailto:tu.email@ejemplo.com"
+      value: "carloscristopherma@gmail.com",
+      href: "mailto:carloscristopherma@gmail.com"
     },
     {
       icon: Phone,
       label: "Teléfono",
-      value: "+1 (123) 456-7890",
-      href: "tel:+11234567890"
+      value: "+51 900128962",
+      href: "tel: 900128962"
     },
     {
       icon: MapPin,
       label: "Ubicación",
-      value: "Tu Ciudad, País",
+      value: "Lima, Perú",
       href: "#"
     }
   ];
@@ -51,7 +51,7 @@ const Contact = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 px-4"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto pt-4">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">
           <span className="text-accent">Contacto</span>
         </h1>

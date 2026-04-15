@@ -50,7 +50,7 @@ const Tools = () => {
       transition={{ duration: 0.5 }}
       className="min-h-screen pt-20 px-4"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto pt-4">
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">
           Mis <span className="text-accent">Herramientas</span>
         </h1>

@@ -6,3 +6,30 @@ body {
   @apply bg-primary text-white; /* Fondo oscuro por defecto */
   font-family: 'Inter', sans-serif;
 }
+
+.hero-carousel__track {
+  display: flex;
+  gap: 1.5rem;
+  animation: heroScroll 40s linear infinite;
+}
+
+.hero-carousel__track:hover {
+  animation-play-state: paused;
+}
+
+.hero-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-carousel__card {
+  flex: 0 0 auto;
+}
+
+@keyframes heroScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
